@@ -1,0 +1,34 @@
+name: Checking unit-tests, PEP8 and standard pipeline congruency
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.10.5
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10.5'
+  
+      - name: Install Python dependencies
+        run: |
+          pip install -e .[test]  # Install dependencies, including testing requirements
+
+      - name: install  pytest coverage
+        run: |
+          pip install -e .[test] pytest-cov  # Ensure pytest-cov is installed
+
+      - name: Run Flake8 for PEP8 compliance
+        run: |
+          flake8 --count src  # Check code for PEP8 compliance in the 'src' directory
+      - name: Run pytest for unit tests
+        run: |
+          pytest --cov=src  tests/  # Run unit tests and measure coverage
