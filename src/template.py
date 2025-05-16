@@ -147,5 +147,3 @@ class Template:
                     f"exists with a different ID")
 
         return False
-
-    
