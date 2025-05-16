@@ -121,3 +121,30 @@ class Template:
             bool: True if the template content is empty, False otherwise.
         """
         return not bool(self.template_content)
+
+    def exist_template_part(self, template_part):
+        """
+        Checks if a template part exists in the current template.
+
+        Parameters:
+            template_part (Template): A Template_part object
+            containing the part to check.
+
+        Returns:
+            bool: True if the template part exists, False otherwise.
+        """
+        id = template_part.template_content['elabftw'][
+            'extra_fields_groups'][0]['id']
+        group_name= template_part.template_content['elabftw'][
+            'extra_fields_groups'][0]['name']
+
+        for group in self.template_content['elabftw']['extra_fields_groups']:
+            if group['id'] == id :
+                return True
+            elif group['name'] == group_name:
+                ValueError(
+                    f"Group name '{group_name}' already exists with a different ID")
+
+
+        return False
+    
