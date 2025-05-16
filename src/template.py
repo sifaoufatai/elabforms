@@ -135,16 +135,17 @@ class Template:
         """
         id = template_part.template_content['elabftw'][
             'extra_fields_groups'][0]['id']
-        group_name= template_part.template_content['elabftw'][
+        group_name = template_part.template_content['elabftw'][
             'extra_fields_groups'][0]['name']
 
         for group in self.template_content['elabftw']['extra_fields_groups']:
-            if group['id'] == id :
+            if group['id'] == id:
                 return True
             elif group['name'] == group_name:
                 ValueError(
-                    f"Group name '{group_name}' already exists with a different ID")
-
+                    f"Group name '{group_name}' already "
+                    f"exists with a different ID")
 
         return False
+
     
